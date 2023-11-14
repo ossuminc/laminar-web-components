@@ -1,29 +1,39 @@
 # Laminar Web Components
 
-[Laminar](https://github.com/raquo/Laminar) type definitions for web component collections. Currently included collections:
+This repository provides [Laminar](https://github.com/raquo/Laminar) type definitions for web component collections. Currently included collections consist of:
 
 - [Google's Material Web Components](https://github.com/material-components/material-components-web-components)
+- [Ossum Web Components](https://github.com/laminar-web-components/ossum-web-components)
 
 ## Usage
 
 ### Add dependency
 
-Package is published to GitHub Packages in this repository. To reference it, you can use
+This package is published to GitHub Packages in this repository. To reference it, you can use the
 [sbt-github-packages](https://github.com/djspiewak/sbt-github-packages) SBT plugin:
 
 ```
-resolvers += Resolver.githubPackages("uosis")
+resolvers += Resolver.githubPackages("ossuminc")
 
-libraryDependencies += "com.github.uosis" %%% "laminar-web-components-material" % "0.1.0"
+libraryDependencies ++= Seq(
+  "com.ossuminc" %%% "laminar-web-components-material" % "0.1.0",
+  "com.ossuminc" %%% "laminar-web-components-ossum" % "0.1.0"
+)
 ```
 
 ### Ensure you have [sbt-scalajs-bundler](https://scalacenter.github.io/scalajs-bundler/) plugin
 
-Web Components have NPM dependencies.
+Because web components have NPM dependencies, we need to use `sbt-scalajs-bundler` to help us
+resolve those NPM dependencies. Place this in your `project/plugins.sbt` file:
+
+```
+addSbtPlugin("org.scala-js" % "sbt-scalajs" % "1.14.0")
+addSbtPlugin("ch.epfl.scala" % "sbt-scalajs-bundler" % "0.17.0")
+```
 
 ### Use components in your app
 
-Web Components have similar interface to built-in elements. See examples below.
+Web Components have a similar interface as the built-in elements. See the examples below for some inspiration.
 
 ## Examples
 
