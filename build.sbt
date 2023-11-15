@@ -68,5 +68,20 @@ lazy val ossum = project.in(file("ossum"))
       _.withSourceMap(false)
     },
     useYarn := true,
-    Compile / npmDependencies ++= Components()
   )
+
+lazy val examples = project.in(file("examples"))
+  .enablePlugins(ScalaJSPlugin)
+  .enablePlugins(ScalaJSBundlerPlugin)
+  .dependsOn(material)
+  .settings(
+    name := "laminar-components-showcase",
+    normalizedName := "laminar-components-showcase",
+    organization := "com.ossuminc",
+    scalaVersion := "3.3.1",
+    libraryDependencies += "com.raquo" %%% "laminar" % "0.13.0",
+    resolvers += Resolver.githubPackages("ossuminc"),
+    scalaJSUseMainModuleInitializer := true,
+    Compile / fastOptJS / scalaJSLinkerConfig ~= {_.withSourceMap(false)},
+    useYarn := true
+)
